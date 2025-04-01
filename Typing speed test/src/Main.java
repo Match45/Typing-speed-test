@@ -18,6 +18,7 @@ public class Main {
 		frame.setLocationRelativeTo(null);
 		frame.setTitle("Typing Speed Tester");
 		frame.setLayout(null);
+		frame.getContentPane().setBackground(new Color(200, 230, 255)); // Light Pink 
 		
 		JLabel inst = new JLabel();
 		inst.setText("Instructions");
@@ -28,21 +29,24 @@ public class Main {
 		JTextArea details = new JTextArea(
 				"1. Read the instructions carefully before you begin the test.\n" +
 			    "2. This is a basic test which will calculate words typed per minute.\n" +
-			    "3. The test machinism is simply to copy and type the paragraph\n" + 
-			    "   given above the blank text box.\n" +
-			    "4. The test will be set for 1 minute (60 seconds).\n" +
-			    "5. Click the start button and a timer will begin.\n" + 
+			    "3. The test requires the user to simply type the paragraph given in \n" + 
+			    "   the text box above the typing area.\n" +
+			    "4. Select your preferred test duration from given options \n" +
+			    "   (30 seconds or 60 seconds).\n" +
+			    "5. Click on the blank text area. The timer will begin as soon as \n" +
+			    "   you start typing. \n" + 
 			    "6. Type the paragraph as fast as you can.\n" + 
-			    "7. Click submit to get your wpm (words per minute)."
+			    "7. Your score will be displayed when the timer runs out."
 		);
-		details.setBounds(20,50,450,170);
+		details.setBounds(20,50,450,220);
 		details.setFont(new Font("Times New Roman", Font.ITALIC, 16));	
 		details.setEditable(false);
 		frame.add(details);
 		
 		JButton b1 = new JButton();
 		b1.setText("Go to Test");
-		b1.setBounds(190,250,100,30);
+		b1.setBounds(190,300,100,30);
+		b1.setBackground(Color.CYAN); 
 		frame.add(b1);
 		
 		b1.addActionListener(new ActionListener()
@@ -54,11 +58,9 @@ public class Main {
 				{
 					frame.dispose();
 					Test testpage = new Test();
-				}
-						
+				}		
 			}
 		});
-		
 		frame.setVisible(true);
 	}
 }
