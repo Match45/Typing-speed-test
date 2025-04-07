@@ -167,7 +167,8 @@ public class Test
                 correctWords++;
             }
         }
-        double Accuracy = ((double) correctWords / typedWords.length) * 100;int wordCount = typedText.isEmpty() ? 0 : typedText.split("\\s+").length;
+        double Accuracy = ((double) correctWords / typedWords.length) * 100;
+	int wordCount = typedText.isEmpty() ? 0 : typedText.split("\\s+").length;
         
         int wpm = (int) ((wordCount / ((System.currentTimeMillis() - startTime) / 60000.0)));
         String typingLevel;
