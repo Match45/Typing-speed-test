@@ -26,8 +26,6 @@ public class Test
  	String para1 = "The sky is blue, the sun is shining, and a cool breeze is blowing as people walk in the park, children laugh and play, birds fly high in the air, and everything feels calm and peaceful on this beautiful day.";
     String para2 = "As the rain gently falls, tiny droplets race down the window, creating winding paths that disappear as new ones take their place, while the soft rumble of thunder echoes in the distance, and the fresh scent of wet earth fills the air, bringing a sense of calm and comfort, as people sit indoors with a warm cup of tea, watching the world slow down for a while, enjoying the peaceful rhythm of nature’s soothing melody.";
 
-	String originalText = "";
-	
 	Test()
 	{
 		frm.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -146,29 +144,32 @@ public class Test
         }
         testStart = false;
         timerLabel.setText("Time Left: " + duration + " seconds");
-        blank.setText(""); // Clear typing area
-        blank.setEditable(true); // Enable typing again
+        blank.setText("");
+        blank.setEditable(true); 
     }
 
     public void endTest() 
     {
     	blank.setEditable(false);
-        testStart = false;
+    	testStart = false;
 
         String typedText = blank.getText().trim();
         String originalText = textarea.getText().trim();
+        
+        String[] originalWords = originalText.trim().split("\\s+");
+        String[] typedWords = typedText.trim().split("\\s+");
 
-        int correctChars = 0;
-        int totalChars = Math.min(typedText.length(), originalText.length());
-        for (int i = 0; i < totalChars; i++) 
+        int correctWords = 0;
+        for (int i=0; i<Math.min(originalWords.length, typedWords.length); i++) 
         {
-            if (typedText.charAt(i) == originalText.charAt(i)) 
-            	correctChars++;
+            if (originalWords[i].equals(typedWords[i])) 
+            {
+                correctWords++;
+            }
         }
-        double accuracy = (totalChars == 0) ? 0 : (correctChars / (double) totalChars) * 100;
-        int wordCount = typedText.isEmpty() ? 0 : typedText.split("\\s+").length;
+        double Accuracy = ((double) correctWords / typedWords.length) * 100;int wordCount = typedText.isEmpty() ? 0 : typedText.split("\\s+").length;
+        
         int wpm = (int) ((wordCount / ((System.currentTimeMillis() - startTime) / 60000.0)));
-
         String typingLevel;
         if (wpm <= 30) 
         {
@@ -187,8 +188,9 @@ public class Test
             typingLevel = "Expert.";
         }
         JOptionPane.showMessageDialog(frm, 
-        		"WPM: " + wpm + "\nAccuracy: " + String.format("%.2f", accuracy) + "%\nLevel: " + typingLevel + "\n", 
+        		"WPM: " + wpm + "\nAccuracy: " + String.format("%.2f", Accuracy) + "%\nLevel: " + typingLevel + "\n", 
         		"Results", JOptionPane.INFORMATION_MESSAGE);
-        frm.dispose();
+        
+        resetTest();
     }
 }
